@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/passo a passo/configurando admin personalizado campos UserCreationForm e UserChangeForm.txt" />
+    <file url="file://$PROJECT_DIR$/passo a passo/configurando ambiente de admin para a nova tabela usuario.txt" />
+    <file url="file://$PROJECT_DIR$/passo a passo/criando usuario personalizado.txt" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (usuario-personalizado-django)" project-jdk-type="Python SDK" />
+  <component name="PyCharmProfessionalAdvertiser">
+    <option name="shown" value="true" />
+  </component>
+</project>

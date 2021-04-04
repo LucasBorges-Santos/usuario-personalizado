@@ -1,0 +1,40 @@
+"ALTAMENTE RECOMENDADO CRIAR UM MODELO DE USUARIO CUSTOMIZADO MESMO SEM NECESSIDADE"
+
+No terminal, faça as configurações de um novo projeto:
+    - criando venv
+    - instalando django
+    - criando projeto
+    - CRIE UM APP 'users' OU 'accounts'
+
+Em 'models' de 'users', importe o 'AbstractUser':
+
+    from django.contrib.auth.models import AbstractUser
+
+  
+Crie uma classe 'User' que estende a classe 'AbstractUser':
+	
+    class User(AbstractUser):
+	#  aqui podemos criar nossos campos personalizados dos usuarios. 
+        pass
+
+Criando um campo 'bio' de exemplo:
+
+    from django.contrib.auth.models import AbstractUser
+        
+
+    class User(AbstractUser):
+	bio = models.TextField(blank=True)
+
+Em 'settings.py', precisamos acrescentar o app que criamos (users) em 'INSTALLED_APPS'.
+
+Outra configuração que precisamos fazer, é adicionar a variavel 'AUTH_USER_MODEL', que irá receber a classe do usuario personalizado, neste caso:
+
+    AUTH_USER_MODEL = 'users.User'
+
+Dessa forma, ja podemos fazer a 'migration'.
+    
+    python manage.py makemigrations users
+    python manage.py migrate
+
+
+

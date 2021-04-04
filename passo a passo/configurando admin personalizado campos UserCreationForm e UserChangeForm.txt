@@ -1,0 +1,76 @@
+'ESTENDENDO USER ADMIN'
+
+Na pasta do app dos nossos usuarios, em 'users', crie um novo arquivo chamado 'forms.py', e nele, crie uma classe que estende os formularios 'UserChangeForm' e 'UserCreationForm', que são responsaveis pela alteração e criação dos formularios da pagina de admin, e alterando o 'model' de 'Meta', de cada classe, para a nova tabela de usuario:
+
+    from django.contrib.auth import forms
+    form .models import User
+
+
+    class UserChangeForm(forms.UserChangeForm):
+        class Meta(forms.UserChangeForm.Meta):
+            model = User
+
+    clas UserCrationForm(forms.UserCreationForm):
+        class Meta(forms.USerCreationForm.Meta):
+            model = User
+
+Com a alteração feita, voltamos a 'admin.py', e alteramos o campo que haviamos adicionado, importando as classes de formularios feitas em 'forms.py', e estendemos a classe admin, configurando a nossa propria 'UserAdmin':
+
+ANTES
+
+    from django.contrib import admin
+    form django.contrib.auth import admin as auth_admin 
+
+    #  como 'admin' ja estava importado, mudamos o nome de 'admin', para 'auth_admin'
+
+    from .models import User
+
+
+    admin.site.register(User, auth_admin.UserAdmin)
+
+DEPOIS
+
+    from django.contrib import admin
+    from django.contrib.auth import admin as auth_admin
+    
+    # campos de formularios
+    from .forms import UserChangeForm, UserCreationForm
+    from .models import User
+
+    @admin.register(User)
+    class UserAdmin(auth_admin.UserAdmin):
+	form = UserChangeForm
+	add_form = UserCreationForm
+	model = User
+
+caso haja duvida sobre o porque a classe alterar 'form', 'add_form' e 'model', podemos encontrar esses nomes entrando no arquivo 'UserAdmin', e nele podemos ver que essas variaveis recebem outros formularios, neste caso, mudamos para os formularios que nós mesmos fizemos no arquivo 'forms.py'.
+
+EXEMPLO DE COMO ADICIONAR O CAMPO PARA BIO
+
+    from django.contrib import admin
+    from django.contrib.auth import admin as auth_admin
+    
+    # campos de formularios
+    from .forms import UserChangeForm, UserCreationForm
+    from .models import User
+
+    @admin.register(User)
+    class UserAdmin(auth_admin.UserAdmin):
+	form = UserChangeForm
+	add_form = UserCreationForm
+	model = User
+	
+	# Adicionando campo de texto para 'bio', criado no usuario que personalizamos
+	
+	fieldsets = auth_admin.UserAdmin.Fieldsets + (
+	    ("Campos Personalizados", {"fields": ("bio",)}),
+	)
+
+E dessa forma, temos acesso a um 'TextField' para editarmos a 'bio', criada para nosso usuario personalizado.
+    
+
+
+
+    
+
+     

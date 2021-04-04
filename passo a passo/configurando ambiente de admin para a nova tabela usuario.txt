@@ -1,0 +1,25 @@
+"CONFIGURANDO AMBIENTE DE ADMIN PARA A NOVA TABELA DE USUARIOS"
+
+Criando um super usuario, e entrando wm '/admin', podemos verificar que temos um erro, que a tabela 'Users', não esta aparecendo, podemos corrigir isso da seguinte forma.
+
+Na pasta do app criado, no caso 'users', em 'admin.py', importamos a tabela de usuario personalizado 'User', e depois registramos no site:
+	
+    from django.contrib import admin
+    from .models import User
+
+    admin.site.register(User)
+
+Com isso, a tabela 'Users' aparece, porêm, não esta configurado com as configurações de modelo padrão. podemos corrigir isso, registrando a tabela 'User', com as mesmas configurações do 'UserAdmin':
+
+    from django.contrib import admin
+    form django.contrib.auth import admin as auth_admin 
+
+    #  como 'admin' ja estava importado, mudamos o nome de 'admin', para 'auth_admin'
+
+    from .models import User
+
+
+    admin.site.register(User, auth_admin.UserAdmin)
+
+Dessa forma, o amiente do admin ja está configurado para a nova tabela de usuario.
+    
