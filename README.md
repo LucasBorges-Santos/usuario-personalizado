@@ -1,2 +1,2 @@
 # usuario-personalizado-django
-Criando um usuário personalizado
+Criando um usuário personalizado para django.
